@@ -3,10 +3,20 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+//==========require handlebars
+const exphbs = require('express-handlebars')
+app.set('view engine', 'hbs')
+const hbs = exphbs.create({
+    // Specify helpers which are only registered on this instance.
+    defaultLayout: 'main',
+    extname: '.hbs'
+});
+app.engine('hbs', hbs.engine)
+
 
 //==========router
 app.get('/', (req, res) => {
-    res.send('login server is open')
+    res.render('index')
 })
 
 
