@@ -23,6 +23,10 @@ app.post('/', (req, res) => {
     req.params
 })
 
+app.get('/views/sign_up', (req, res) => {
+    res.render('sign_up')
+})
+
 
 
 app.listen(port, () => { console.log(`Express is running on http://localhost:${port}`) })
