@@ -14,6 +14,10 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine)
 
 
+//==========中介軟體
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+
 //==========router
 app.get('/', (req, res) => {
     res.render('index')
@@ -25,6 +29,12 @@ app.post('/', (req, res) => {
 
 app.get('/views/sign_up', (req, res) => {
     res.render('sign_up')
+})
+
+app.post('/views/sign_up', (req, res) => {
+    const memberInfo = req.body
+    console.log(memberInfo)
+    res.render('index')
 })
 
 
