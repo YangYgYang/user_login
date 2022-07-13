@@ -18,6 +18,10 @@ app.engine('hbs', hbs.engine)
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+//==========引入 mongoDB
+require('./config/mongoose')
+
+
 //==========router
 app.get('/', (req, res) => {
     res.render('index')
