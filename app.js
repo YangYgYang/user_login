@@ -28,15 +28,29 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-app.post('/', (req, res) => {
-    req.params
+app.post('/log_in', (req, res) => {
+    const getMemberInfo = req.body
+    const getMemberId = req.body.user_id
+    const getMemberPsw = req.body.password
+    User.find({ user_id: getMemberId })
+        .lean()
+        .then((memberdata) => {
+            if (memberdata.length === 0 || memberdata[0].password !== getMemberPsw) {
+                console.log("帳號或密碼錯誤")
+                res.render('index', { message: '帳號或密碼錯誤' })
+            } else if (memberdata[0].password === getMemberPsw) {
+                console.log('該登入了吧')
+                res.render('sheets')
+            }
+        })
+        .catch(error => console.log('error', error))
 })
 
-app.get('/views/sign_up', (req, res) => {
+app.get('/sign_up', (req, res) => {
     res.render('sign_up')
 })
 
-app.post('/views/sign_up', (req, res) => {
+app.post('/sign_up', (req, res) => {
     const memberInfo = req.body
     const memberId = req.body.user_id
     console.log(memberId)
